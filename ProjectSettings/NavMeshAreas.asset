@@ -12,7 +12,17 @@ NavMeshProjectSettings:
   - name: Jump
     cost: 2
   - name: 
+    cost: 4
+  - name: 
     cost: 1
+  - name: 
+    cost: 1
+  - name: 
+    cost: 1
+  - name: 
+    cost: 1
+  - name: Swamp
+    cost: 4
   - name: 
     cost: 1
   - name: 
@@ -55,18 +65,8 @@ NavMeshProjectSettings:
     cost: 1
   - name: 
     cost: 1
-  - name: 
-    cost: 1
-  - name: 
-    cost: 1
-  - name: 
-    cost: 1
-  - name: 
-    cost: 1
-  - name: 
-    cost: 1
-  - name: 
-    cost: 1
+  - name: Fire
+    cost: 6
   - name: 
     cost: 1
   m_LastAgentTypeID: -887442657
@@ -75,8 +75,8 @@ NavMeshProjectSettings:
     agentTypeID: 0
     agentRadius: 0.5
     agentHeight: 1.4
-    agentSlope: 5.2
-    agentClimb: 0.6
+    agentSlope: 15.5
+    agentClimb: 0.4
     ledgeDropHeight: 0
     maxJumpAcrossDistance: 0
     minRegionArea: 2

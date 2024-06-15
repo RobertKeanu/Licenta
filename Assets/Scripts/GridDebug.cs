@@ -154,7 +154,7 @@ public class GridDebug : MonoBehaviour
 			}
 			else
 			{
-				DrawGrid(gridSize, Color.green, cellRadius);
+				DrawGrid(gridSize, Color.red, cellRadius);
 			}
 		}
 		
@@ -169,7 +169,7 @@ public class GridDebug : MonoBehaviour
 
 				foreach (Cell curCell in curFlowField.grid)
 				{
-					Handles.Label(curCell.worldPos, curCell.cost.ToString(), style);
+					Handles.Label(curCell.worldPos + new Vector3(0f, 0f, 0.7f), curCell.cost.ToString(), style);
 				}
 				break;
 				
@@ -177,7 +177,7 @@ public class GridDebug : MonoBehaviour
 
 				foreach (Cell curCell in curFlowField.grid)
 				{
-					Handles.Label(curCell.worldPos, curCell.bestCost.ToString(), style);
+					Handles.Label(curCell.worldPos + new Vector3(0f, 0f, 0.7f), curCell.bestCost.ToString(), style);
 				}
 				break;
 				
