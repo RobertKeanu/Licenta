@@ -35,12 +35,4 @@ public class Pacman : MonoBehaviour
             this.movement.SetDirection(Vector2.right);
         }
     }
-    public void ResetState()
-    {
-        enabled = true;
-        spriteRenderer.enabled = true;
-        collider.enabled = true;
-        movement.ResetState();
-        gameObject.SetActive(true);
-    }
 }

@@ -18,12 +18,7 @@ public class Movement : MonoBehaviour
         rigidbody = GetComponent<Rigidbody2D>();
         startingPosition = transform.position;
     }
-
-    private void Start()
-    {
-        //ResetState();
-    }
-
+    
     public void ResetState()
     {
         speedMultiplier = 1f;
@@ -58,12 +53,10 @@ public class Movement : MonoBehaviour
         {
             this.direction = direction;
             nextDirection = Vector3.zero;
-            //Debug.Log(direction);
         }
         else
         {
             nextDirection = direction;
-            //Debug.Log(direction);
         }
     }
 

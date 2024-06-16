@@ -42,26 +42,6 @@ public class AgentController : Agent
         movement = GetComponent<Movement>();
         rigidbody = GetComponent<Rigidbody2D>();
     }
-
-    /*private void Start()
-    {
-        previousDistance = Vector3.Distance(transform.position, target.position);
-    }
-
-    private void Update()
-    {
-        float currentDistance = Vector3.Distance(transform.position, target.position);
-        if(currentDistance > previousDistance)
-        {
-            AddReward(-1f/MaxStep);
-        }
-
-        if (currentDistance < previousDistance)
-        {
-            AddReward(1f/MaxStep);
-        }
-        previousDistance = currentDistance;
-    }*/
     private void CreatePellet()
     {
         int counter = 0;
@@ -134,12 +114,6 @@ public class AgentController : Agent
         {
             sensor.AddObservation(i.transform.localPosition);
         }
-
-        /*foreach (var q in spawnedPelletsList)
-        {
-            sensor.AddObservation(Vector3.Distance(transform.localPosition, q.transform.localPosition));
-            //Debug.Log(Vector3.Distance(transform.position, q.transform.position));
-        }*/
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.up, 0.05f, layerMask);
         sensor.AddObservation(hit);
     }
@@ -154,18 +128,11 @@ public class AgentController : Agent
         collidedPoints.Clear();
         pointsremaining = 4;
         gameManager.ResetState();
-        //target.localPosition = new Vector3(xpositions[Random.Range(0,xpositions.Length)], ypositions[Random.Range(0,ypositions.Length)], 0f);
-        //target.localPosition = new Vector3(8.2f, -9.7f, 0f);
-        //previousDistance = Vector2.Distance(transform.position, target.position);
     }
 
     public override void Heuristic(in ActionBuffers actionsOut)
     {
-        //ActionSegment<int> discreteAction = actionsOut.DiscreteActions;
-        /*discreteAction[0] = Mathf.RoundToInt(Input.GetAxis("Horizontal"));
-        discreteAction[1] = Mathf.RoundToInt(Input.GetAxis("Vertical"));*/
         var discreteActionsOut = actionsOut.DiscreteActions;
-        //discreteActionsOut[0] = 0;
         if (Input.GetKey(KeyCode.D))
         {
             discreteActionsOut[0] = 3;
@@ -204,26 +171,6 @@ public class AgentController : Agent
     }
     public override void OnActionReceived(ActionBuffers actions)
     {
-        /*float moveX = actions.DiscreteActions[0];
-        float moveY = actions.DiscreteActions[1];
-        switch (moveX)
-        {
-            case 0: xv = 0f; break;
-            case 1: xv = -1f;
-                break;
-            case 2: xv = +1f;
-                break;
-        }
-        switch (moveY)
-        {
-            case 0: yv = 0f; break;
-            case 1: yv = -1f;
-                break;
-            case 2: yv = +1f;
-                break;
-        }
-        //Debug.Log(new Vector2(xv,yv));
-        movement.SetDirection(new Vector2(xv,yv));*/
         int action = actions.DiscreteActions[0];
         MoveAgent(action);
         AddReward(-1f / MaxStep);
@@ -233,25 +180,16 @@ public class AgentController : Agent
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Pellet"))
         {
-            //spawnedPelletsList.Remove(other.gameObject);
-            //Destroy(other.gameObject);
             if (!collidedPoints.Contains(other.gameObject.transform.position))
             {
                 collidedPoints.Add(other.gameObject.transform.position);
                 AddReward(1/pointsremaining);
                 pointsremaining -= 1;
-                //Debug.Log(pointsremaining);
             }
-
-            //Debug.Log(GetCumulativeReward());
             Vector3 otherpelletloc = FindUncollidedPelletPosition();
             other.gameObject.transform.position = otherpelletloc;
-            //Debug.Log(other.gameObject.transform.position);
-            //Debug.Log(ok);
-            //Debug.Log(collidedPoints);
             if (collidedPoints.Count == 4)
             {
-                //RemovePellet(spawnedPelletsList);
                 SetReward(10f);
                 Invoke("EndEpisodeWithDelay", 0.0f);
             }
